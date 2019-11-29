@@ -1,6 +1,3 @@
-
-
-
 class ECC():
     def __init__(self, a=-1, b=188, p=751, P =(1,3)):
         self.a = a
@@ -37,22 +34,16 @@ class ECC():
         t = self.P
         counter=0
         while True:
+            if t[0] == self.P[0] and (t[1]+self.P[1]) % self.p == 0:
+                return counter+1 # +1 for the O point
             t = self.addPQ(self.P,t)
             counter += 1
-            if self.P == t:
-                break
-        return counter
 
 if __name__ == '__main__':
-    a = int(input('a = '))
-    b = int(input('b = '))
-    p = int(input('p = '))
-    P = (int(input('Px = ')),int(input('Py = ')))
+    a = 1 #int(input('a = '))
+    b = 7 #int(input('b = '))
+    p = 29 #int(input('p = '))
+    P = (1,3) #(int(input('Px = ')),int(input('Py = ')))
     ecc = ECC(a, b, p, P)
-    #if P is None:
-    #    P = (0, 376)
-    [print(n, ecc.nP(n, P)) for n in range(1,40)]
-
-    #print(ecc.num_points())
-
-
+    print(ecc.num_points())
+    # output: 34
